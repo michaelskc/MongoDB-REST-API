@@ -2,6 +2,8 @@
 const express = require('express');
 const router = express.Router()
 module.exports = router;
+const auth = require('../middleware/authtoken');
+
 
 // Imports the data models from your models folder. 
 // Data models specify what data a route will receive. You can set variables in the data model to be required, such as the ID..
@@ -18,7 +20,7 @@ const Model = require('../models/profileModel');
 // It is under the /profiles/ route because of the line in the index.js file:
 // `const profiles = require('./routes/profiles')`
 // This specifies that /routes/profiles.js is under "profiles"
-router.get('/get/:id', async (req, res) => {
+router.get('/get/:id', auth, async (req, res) => {
 
     // This tries to use the data model to find a MongoDB index by the ID specified in the request parameters (req.params).
     // If there is an ID specified, it will respond (res) with the JSON data collected from MongoDB.
@@ -37,7 +39,7 @@ router.get('/get/:id', async (req, res) => {
 // The following methods follow the same format as the Get by ID method.
 
 //Post Method
-router.post('/post', async (req, res) => {
+router.post('/post', auth, async (req, res) => {
     const data = new Model ({
         _id: req.body.uuid,
         username: req.body.username,
@@ -55,7 +57,7 @@ router.post('/post', async (req, res) => {
 
 
 //Get all Method
-router.get('/getAll', async (req, res) => {
+router.get('/getAll', auth, async (req, res) => {
     try{
         const data = await Model.find();
         res.json(data)
@@ -65,7 +67,7 @@ router.get('/getAll', async (req, res) => {
     }
 })
 //Update by ID Method
-router.patch('/update/:id', async (req, res) => {
+router.patch('/update/:id', auth, async (req, res) => {
     try {
         const id = req.params.id;
         const updatedData = req.body;
@@ -82,7 +84,7 @@ router.patch('/update/:id', async (req, res) => {
     }
 })
 //Delete by ID Method
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', auth, async (req, res) => {
     try {
         const id = req.params.id;
         const data = await Model.findByIdAndDelete(id)

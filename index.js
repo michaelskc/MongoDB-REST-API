@@ -54,7 +54,9 @@ database.once('connected', () => {
 // It's self explainatory once you read through the route files.
 
 const profiles = require('./routes/profiles')
+const auth = require('./routes/auth.js')
 
 // This assigns a directory/link for each route file. All routes in the "profiles.js" file will be under "/profile" when creating requests.
 
 app.use('/profile', profiles)
+app.use('/auth', auth)
