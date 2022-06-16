@@ -1,7 +1,5 @@
 # MongoDB REST API
- A concise MongoDB REST API with documentation aimed at beginners. Perfect for any personal project that utilizes MongoDB.
- - This does NOT contain an authentication system.
-
+ A concise MongoDB REST API with documentation aimed at beginners. Perfect for any personal project that utilizes MongoDB and authenticates users with JWT using modern password storing methods.
 # Libraries Used
  This app was built with:
  - MongoDB 
